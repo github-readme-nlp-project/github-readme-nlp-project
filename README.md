@@ -11,7 +11,7 @@ The end goal was to create an NLP model that accurately predicted the programmin
 ### Prepare and clean data
 - Drop nulls
 - Lowercase all text
-- Remove stopwords (including customer, customers, 1, 2, and i)
+- Remove stopwords
 - Tokenize the data
 - Stem and Lemmatize
 
