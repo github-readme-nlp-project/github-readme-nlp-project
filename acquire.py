@@ -15,7 +15,6 @@ import json
 from typing import Dict, List, Optional, Union, cast
 import requests
 from bs4 import BeautifulSoup
-
 from env import github_token, github_username
 
 # TODO: Make a github personal access token.

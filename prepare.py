@@ -4,13 +4,36 @@ import unicodedata
 import re
 import nltk
 from nltk.corpus import stopwords
+import nltk.sentiment
+from sklearn.model_selection import train_test_split
 
-# potentially for project use
+def split_data(df):
+    train, test = train_test_split(df, test_size=0.2, random_state=123)
+    train, val = train_test_split(train, test_size=.25, random_state=123)
+    
+    return train, val, test
+
+
 def clean_df(df, cols_to_clean, method='lemmatize', extra_words=[], exclude_words=[]):
     d = df.copy()
+    d = d.dropna()
+    d.language = create_other(d)
     for col in cols_to_clean:
         d[col+'_clean'] = clean_data(d[col], method, extra_words, exclude_words)
+    d['rm_length'] = [len(text) for text in d.readme_contents_clean]
+    sia = nltk.sentiment.SentimentIntensityAnalyzer()
+    d['sentiment'] = d.readme_contents_clean.apply(lambda doc: sia.polarity_scores(doc)['compound'])
     return d
+
+def create_other(df):
+    copy = df.language.copy()
+    output = []
+    for lang in copy:
+        if (lang != 'JavaScript') & (lang != 'Python') & (lang != 'Go'):
+            output.append('Other')
+        else:
+            output.append(lang)
+    return output
 
 def clean_data(col, method='lemmatize', extra_words=[], exclude_words=[]):
     bc = [basic_clean(entry) for entry in col]   
