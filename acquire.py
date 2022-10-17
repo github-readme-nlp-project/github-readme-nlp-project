@@ -14,6 +14,7 @@ import os
 import json
 from typing import Dict, List, Optional, Union, cast
 import requests
+from bs4 import BeautifulSoup
 
 from env import github_token, github_username
 
@@ -24,13 +25,35 @@ from env import github_token, github_username
 # TODO: Add your github username to your env.py file under the variable `github_username`
 # TODO: Add more repositories to the `REPOS` list below.
 
-REPOS = [
-    "gocodeup/codeup-setup-script",
-    "gocodeup/movies-application",
-    "torvalds/linux",
-]
+def get_repo_names():
+    names = []
+    langs = ['JavaScript', 'Python', 'Java', 'HTML', 'C++', 'Ruby']
+    for lang in langs:
+        url = f'https://github.com/search?l={lang}&q=stars%3A%3E0&s=stars&type=Repositories?spoken_language_code=en'
+        soup = BeautifulSoup(requests.get(url).content, 'html.parser')
+        repos = soup.select('a.v-align-middle')
+        for r in repos:
+            repo_name = r['href']
+            names.append(repo_name)
+        page = 2
+        while page <= 100:
+            url = f'https://github.com/search?l={lang}&p={page}&q=stars%3A%3E0&s=stars&type=Repositories?spoken_language_code=en'
+            soup = BeautifulSoup(requests.get(url).content, 'html.parser')
+            repos = soup.select('a.v-align-middle')
+            for r in repos:
+                repo_name = r['href']
+                names.append(repo_name)
+            print('finishing page '+str(page))
+            page += 1
+    
+    return names
+
+
+REPOS = get_repo_names()
+
 
 headers = {"Authorization": f"token {github_token}", "User-Agent": github_username}
+print(headers)
 
 if headers["Authorization"] == "token " or headers["User-Agent"] == "":
     raise Exception(
@@ -50,7 +73,7 @@ def github_api_request(url: str) -> Union[List, Dict]:
 
 
 def get_repo_language(repo: str) -> str:
-    url = f"https://api.github.com/repos/{repo}"
+    url = f"https://api.github.com/repos{repo}"
     repo_info = github_api_request(url)
     if type(repo_info) is dict:
         repo_info = cast(Dict, repo_info)
@@ -65,7 +88,7 @@ def get_repo_language(repo: str) -> str:
 
 
 def get_repo_contents(repo: str) -> List[Dict[str, str]]:
-    url = f"https://api.github.com/repos/{repo}/contents/"
+    url = f"https://api.github.com/repos{repo}/contents/"
     contents = github_api_request(url)
     if type(contents) is list:
         contents = cast(List, contents)
