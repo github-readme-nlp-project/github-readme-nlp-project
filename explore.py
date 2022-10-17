@@ -6,18 +6,18 @@ import nltk
 from wordcloud import WordCloud
 
 def q1_vis(all_words, word_counts):
-    plt.figure(figsize=(16, 9))
-
     (word_counts.sort_values('All', ascending=False)
      .head(20)
      .apply(lambda row: row/row['All'], axis = 1)
      .drop(columns = 'All')
      .sort_values(by = 'JavaScript')
-     .plot.barh(stacked = True, width = 1, ec = 'k')
+     .plot.barh(stacked = True, width = 1, ec = 'k', figsize=(12, 8))
     )
     plt.title('% of lang for the most common 20 words')
     plt.show()
+    
     print()
+    
     plt.figure(figsize=(12,8))
     img = WordCloud().generate(all_words)
     plt.imshow(img)
