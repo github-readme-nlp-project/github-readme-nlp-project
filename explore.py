@@ -36,8 +36,8 @@ def q2b_vis(all_words):
     
 def q1_vis(train):
     plt.figure(figsize=(12,8))
-    sns.boxplot(data=train, x='language', y='rm_length')
-    plt.title('Python Lags in Word Count where JavaScript Leads')
+    sns.boxplot(data=train, x='language', y='rm_length', order=['JavaScript', 'Java', 'Python', 'Ruby', 'Other'])
+    plt.title('Java Lags in Word Count where Ruby Leads')
     plt.ylabel('README Word Count')
     plt.ylim(0,35000)
     plt.show()
