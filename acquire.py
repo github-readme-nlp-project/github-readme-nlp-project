@@ -16,6 +16,8 @@ from typing import Dict, List, Optional, Union, cast
 import requests
 from bs4 import BeautifulSoup
 from env import github_token, github_username
+from random import randint
+from time import sleep
 
 # TODO: Make a github personal access token.
 #     1. Go here and generate a personal access token: https://github.com/settings/tokens
@@ -26,7 +28,7 @@ from env import github_token, github_username
 
 def get_repo_names():
     names = []
-    langs = ['JavaScript', 'Python', 'Java', 'HTML', 'C++', 'Ruby']
+    langs = ['Ruby', 'JavaScript', 'Python', 'Java', 'C++']
     for lang in langs:
         url = f'https://github.com/search?l={lang}&q=stars%3A%3E0&s=stars&type=Repositories?spoken_language_code=en'
         soup = BeautifulSoup(requests.get(url).content, 'html.parser')
@@ -35,15 +37,18 @@ def get_repo_names():
             repo_name = r['href']
             names.append(repo_name)
         page = 2
-        while page <= 100:
+        while page <= 20:
             url = f'https://github.com/search?l={lang}&p={page}&q=stars%3A%3E0&s=stars&type=Repositories?spoken_language_code=en'
             soup = BeautifulSoup(requests.get(url).content, 'html.parser')
             repos = soup.select('a.v-align-middle')
             for r in repos:
                 repo_name = r['href']
                 names.append(repo_name)
-            print('finishing page '+str(page))
+            print(f'finishing page: {page} of {lang}. Gathered {len(names)} repos.')
             page += 1
+            sleep(5)
+            if len(names)%50 == 0:
+                sleep(30)
     
     return names
 
@@ -64,10 +69,13 @@ def github_api_request(url: str) -> Union[List, Dict]:
     response = requests.get(url, headers=headers)
     response_data = response.json()
     if response.status_code != 200:
-        raise Exception(
-            f"Error response from github api! status code: {response.status_code}, "
-            f"response: {json.dumps(response_data)}"
-        )
+        sleep(30)
+        response = requests.get(url, headers=headers)
+        response_data = response.json()
+        if response.status_code != 200:
+            raise Exception(f"Error response from github api! status code: {response.status_code}, "
+                            f"response: {json.dumps(response_data)}"
+            )
     return response_data
 
 

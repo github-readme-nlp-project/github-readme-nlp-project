@@ -29,7 +29,7 @@ def create_other(df):
     copy = df.language.copy()
     output = []
     for lang in copy:
-        if (lang != 'JavaScript') & (lang != 'Python') & (lang != 'Go'):
+        if (lang != 'JavaScript') & (lang != 'Python') & (lang != 'Java') & (lang != 'Ruby'):
             output.append('Other')
         else:
             output.append(lang)
