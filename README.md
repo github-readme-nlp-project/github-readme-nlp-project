@@ -1,18 +1,22 @@
-## Project Goals:
+                      ## Predicting Repository Languages
+                      
+### See our presentation here
+
+### Project Goals:
 The goal of this project are analyse the contents of README and to build a model that can predict the main programming language of a repository.
 
 
-## Project Description
+### Project Description
 The goal of this project is to build a model that can predict the main programming language of from README file of Github repository. This project started by scraping README files from various GitHub repositories using web scraping techniques. Following the acquisition and preparation of our data, our team used natural language processing exploration methods such as word clouds, bigrams, and trigrams. We used multiclass classification methods to create multiple machine learning models.
 The end goal was to create an NLP model that accurately predicted the programming language used in a github repository based on the words and word combinations found in the readme files.
 
-## Initial Questions
+### Initial Questions
 - What are the most common words between languages?
 - Which combination of words appear the most frequent?
 - Does the length of the README vary by programming language?
 - How do languages differ in sentiment within their README?
 
-## Data Dictionary
+### Data Dictionary
 
 Target
 |Name|Type|Description|
@@ -30,7 +34,7 @@ Features
 |sentiment|	float	|the compound sentiment value of the clean README text|
 
 
-## Steps to Replicate this project
+### Steps to Replicate this project
 You will need the following tools/libraries
 - python
 - pandas
@@ -51,7 +55,7 @@ Steps to recreate
 
 
 
-## Project Outline:
+### Project Outline:
 ### Acquisiton of data:
 - Conducted web scraping of 1000 repositories' readme contents as of 17th October, 2022.
 - Filters used were English language, and programming language (JavaScript,Java,Python,Ruby, and C++)
