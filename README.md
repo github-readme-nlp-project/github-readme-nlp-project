@@ -78,3 +78,14 @@ Steps to recreate
 - Baseline prediction was Java, with baseline accuracy of 23%.
 - Models used were DecisionTree, RandomForest and Naive Bayes.
 - Decision Tree model performed the best at 69% accuracy
+
+### Conclusion and Recommendation
+- We succedded on analysing the contents of README and building a model that can predict the main programming language.
+- Ruby projects were overwhelmingly positive in compound sentiment while also being the leader in README lengths; Java was the opposite for both.
+- Overall common words were used equally across all languages.
+- We recommend exploring within a single coding language and look at what is in READMEs across various human language which may provide insight into how different regional coders use that coding language.
+- We recommend researching more on shorter README's as they tend towards negative sentiment.
+
+### Next Steps
+- Given more time, further cleaning of the README content could hone in the model results. (Ex: removing urls and other markdown syntax)
+
