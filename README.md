@@ -53,22 +53,28 @@ Steps to recreate
 
 ## Project Outline:
 ### Acquisiton of data:
-- Conduct web scraping of repositories' readme contents.
-- 
+- Conducted web scraping of 1000 repositories' readme contents as of 17th October, 2022.
+- Filters used were English language, and programming language (JavaScript,Java,Python,Ruby, and C++)
+- Saved the data locally in JSON format.
+
 ### Prepare and clean data
-- Drop nulls
-- Lowercase all text
-- Normalize, encode, and decode the text
-- Remove stopwords using NTLK standard english list
-- Tokenize the data
-- Stem and Lemmatize
-- Split data in train (60%) , validate(20%), test(20%)
+- Dropped nulls
+- Lowercased all text
+- Normalized, encoded, and decoded the text
+- Tokenized the data using NTLK Toktoktokenizer
+- Lemmatized the data using ntlk Wordnetlemmatizer
+- Removed stopwords using NTLK standard english list and extra words
+- Splitted data in train (60%) , validate(20%), test(20%)
 
 
 ### Exploration
-
-- bigrams and trigrams for top language
-- Analyze bigram and trigram word clouds for top language
+- Target variable was Language
+- Used train data only for exploration and use basic exploration data analysis techniques.
+- Created a language bin that empasses languages which are not JavaScript,Java,Python or Ruby
+- Using various visualizations such as boxplot, wordcloud, bigrams, sentiment analysis plot, explored answers to the initial questions
 
 ### Modeling
 - Created and evaluated various classification models, varying the data preprocessing methods and associated hyperparameters.
+- Baseline prediction was Java, with baseline accuracy of 23%.
+- Models used were DecisionTree, RandomForest and Naive Bayes.
+- Decision Tree model performed the best at 69% accuracy
