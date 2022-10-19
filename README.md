@@ -78,7 +78,7 @@ Steps to recreate
 - Using various visualizations such as boxplot, wordcloud, bigrams, sentiment analysis plot, explored answers to the initial questions
 
 ### Modeling
-- Created and evaluated various classification models, varying the data preprocessing methods and associated hyperparameters.
+- Created and evaluated various classification models, varying the data preprocessing methods (Count vectorizier, TF- IDF) and associated hyperparameters.
 - Baseline prediction was Java, with baseline accuracy of 23%.
 - Models used were DecisionTree, RandomForest and Naive Bayes.
 - Decision Tree model performed the best at 69% accuracy
