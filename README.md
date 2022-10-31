@@ -1,7 +1,7 @@
 
 ## Predicting Repository Languages
                       
-### See our presentation [here](https://www.canva.com/design/DAFPWnqLY2U/ig8CXwBMyThosppiCDUu1g/edit?utm_content=DAFPWnqLY2U&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+### See our presentation [here](https://www.canva.com/design/DAFPWnqLY2U/RioilctzSLT2MfJknT7I4g/view?utm_content=DAFPWnqLY2U&utm_campaign=designshare&utm_medium=link&utm_source=recording_view)
 
 ### Project Goals:
 The goal of this project are analyse the contents of README and to build a model that can predict the main programming language of a repository.
